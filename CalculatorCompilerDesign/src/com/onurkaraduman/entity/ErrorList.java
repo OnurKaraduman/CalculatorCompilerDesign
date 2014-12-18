@@ -1,11 +1,11 @@
-package com.onurkaraduman;
+package com.onurkaraduman.entity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ErrorList {
 
-	Map<Integer, String> errorMap;
+	public Map<Integer, String> errorMap;
 	
 	
 	private int ERRORLISTSIZE = 10; 

@@ -6,6 +6,9 @@ import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import com.onurkaraduman.engine.LexicalAnalyser;
+import com.onurkaraduman.engine.ProgressOperation;
+
 public class main {
 
 	public static void main(String[] args) {

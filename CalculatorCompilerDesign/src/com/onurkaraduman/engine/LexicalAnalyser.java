@@ -1,4 +1,4 @@
-package com.onurkaraduman;
+package com.onurkaraduman.engine;
 
 import java.awt.List;
 import java.util.ArrayList;
@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.onurkaraduman.entity.Error;
+import com.onurkaraduman.entity.ErrorList;
+import com.onurkaraduman.entity.Token;
 
 public class LexicalAnalyser {
 
@@ -73,13 +77,8 @@ public class LexicalAnalyser {
 		for (int i = 0; i < c.length; i++) {
 
 			// comment satýrlarýný kaldýr
-			if (c[i] == '!') {
-				i++;
-				while (c[i] != '!') {
-					i++;
-				}
-			} else
-				list.add(String.valueOf(c[i]));
+
+			list.add(String.valueOf(c[i]));
 
 		}
 		return list;
@@ -113,6 +112,20 @@ public class LexicalAnalyser {
 			int tokenType;
 			int startPosition;
 			// eger boþluk gelmiþ ise
+			if (element.equals(comment)) {
+				i++;
+				element = listAll.get(i);
+				while (!element.equals(comment)) {
+					
+					if (i == listAll.size()) {
+						i++;
+						return true;
+					}
+					element = listAll.get(i);
+					i++;
+				}
+			}
+			
 			if (element.equals(space)) {
 				continue;
 			} else if (operationsAll.contains(element)) {

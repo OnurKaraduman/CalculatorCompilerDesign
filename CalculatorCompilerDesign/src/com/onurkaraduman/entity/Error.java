@@ -1,4 +1,4 @@
-package com.onurkaraduman;
+package com.onurkaraduman.entity;
 
 public class Error {
 	private int position;
