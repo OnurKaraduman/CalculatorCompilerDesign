@@ -57,43 +57,6 @@ public class LexicalAnalyser {
 		operationsAll.add(space);
 	}
 
-	public void lexAnalyser() {
-		char[] charArray = textAll.toCharArray();
-
-		for (int i = 0; i < charArray.length; i++) {
-			// boþluklarý atla
-			while (charArray[i] == ' ') {
-				i++;
-			}
-			String txtToken = "";
-			int position = i;
-			int tokenType;
-			// bosluk bulana kadar don
-			// while (charArray[i] != ' ' || charArray[i] != ')'
-			// || charArray[i] != '(' || charArray[i] != '+'
-			// || charArray[i] != '-' || charArray[i] != '/'
-			// || charArray[i] != '*' || charArray[i] != ' '
-			// || charArray[i] != '') {
-			// txtToken += String.valueOf(charArray[i]);
-			// i++;
-			// tokenType = 0;
-			// }
-			try {
-				int controlTokenType = Integer.parseInt(txtToken);
-				tokenType = TOKEN_TYPE_NUMBER;
-			} catch (Exception e) {
-				// TODO: handle exception
-
-				if (position == (i + 1)) {
-
-				}
-				tokenType = TOKEN_TYPE_OPERATION;
-			}
-
-			// Token token = new Token(txtToken, position, tokenType)
-		}
-	}
-
 	// step1- once commentleri temizle
 	// Commentleri kaldýr
 	// Tokenlara ayýr
@@ -142,14 +105,6 @@ public class LexicalAnalyser {
 			return true;
 		}
 		return false;
-	}
-
-	public ArrayList<String> getListAll() {
-		return listAll;
-	}
-
-	public void setListAll(ArrayList<String> listAll) {
-		this.listAll = listAll;
 	}
 
 	public boolean assignTokens() {
@@ -201,32 +156,30 @@ public class LexicalAnalyser {
 			Token token = tokens.get(i);
 			Token token2;
 			if (token.getTokenType() == TOKEN_TYPE_NUMBER) {
-				if ((i+1) >= tokens.size()) {
+				if ((i + 1) >= tokens.size()) {
 					break;
 				}
-				token2 = tokens.get(i+1);
+				token2 = tokens.get(i + 1);
 				if (token2.getTokenType() != TOKEN_TYPE_OPERATION) {
 					error.setError(errorList.errorMap.get(1));
 					error.setErrorCode(1);
 					error.setPosition(token2.getPosition());
 					errors.add(error);
-				}
-				else if (token2.getTokenValue().equals(bracketOpen)) {
+				} else if (token2.getTokenValue().equals(bracketOpen)) {
 					error.setError(errorList.errorMap.get(1));
 					error.setErrorCode(1);
 					error.setPosition(token2.getPosition());
 					errors.add(error);
 				}
-			}
-			else if (token.getTokenType() == TOKEN_TYPE_OPERATION) {
-				if ((i+1) >= tokens.size()) {
+			} else if (token.getTokenType() == TOKEN_TYPE_OPERATION) {
+				if ((i + 1) >= tokens.size()) {
 					error.setError(errorList.errorMap.get(4));
 					error.setErrorCode(4);
 					error.setPosition(token.getPosition());
 					errors.add(error);
 					break;
 				}
-				token2 = tokens.get(i+1);
+				token2 = tokens.get(i + 1);
 				if (i == 0) {
 					error.setError(errorList.errorMap.get(4));
 					error.setErrorCode(4);
@@ -244,7 +197,7 @@ public class LexicalAnalyser {
 				}
 			}
 		}
-		if (errors.size() >0) {
+		if (errors.size() > 0) {
 			return false;
 		}
 		return true;
@@ -258,14 +211,6 @@ public class LexicalAnalyser {
 					+ ". Hata posizyon: " + erro.getPosition()
 					+ ". Hata Mesaji: " + erro.getError());
 		}
-	}
-
-	public ArrayList<Error> getErrors() {
-		return errors;
-	}
-
-	public void setErrors(ArrayList<Error> errors) {
-		this.errors = errors;
 	}
 
 	public ArrayList<String> getOrderedList() {
