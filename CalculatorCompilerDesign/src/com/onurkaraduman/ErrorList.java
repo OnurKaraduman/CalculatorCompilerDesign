@@ -15,6 +15,8 @@ public class ErrorList {
 		errorMap = new HashMap<Integer, String>();
 		errorMap.put(1, "missing operation sign");
 		errorMap.put(2, "wrong character");
-		errorMap.put(3, "missing number");
+		errorMap.put(3, "missing number or bracket");
+		errorMap.put(4, "missing number");
+		errorMap.put(5, "Error!! contains different character");
 	}
 }

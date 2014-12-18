@@ -2,6 +2,7 @@ package com.onurkaraduman;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -15,17 +16,22 @@ public class main {
 		// recursionFunctionExample(0);
 		String a = scanner.nextLine();
 		ArrayList<String> list = new ArrayList<String>();
-		//list = stringToList(a);
+		// list = stringToList(a);
 		LexicalAnalyser lexAnalyzer = new LexicalAnalyser(a);
-		if(lexAnalyzer.startAnalyse()){
+		if (lexAnalyzer.startAnalyse()) {
 			System.out.println("Analiz Basarili");
-			list = lexAnalyzer.getListAll();
-			ProgressOperation po = new ProgressOperation(list);
-			System.out.println(po.resultOfAllText);
-		}
-		else
+			if (!lexAnalyzer.controlTokenOrder()) {
+				System.out.println("Analiz Hatasi");
+				lexAnalyzer.sysOutErrors();
+			} else {
+				list = lexAnalyzer.getOrderedList();
+				ProgressOperation po = new ProgressOperation(list);
+
+				System.out.println(po.resultOfAllText);
+			}
+
+		} else
 			System.out.println("Analiz Hatasi");
-		
 
 	}
 
