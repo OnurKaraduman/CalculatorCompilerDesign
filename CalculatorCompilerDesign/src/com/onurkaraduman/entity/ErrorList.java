@@ -18,5 +18,7 @@ public class ErrorList {
 		errorMap.put(3, "missing number or bracket");
 		errorMap.put(4, "missing number");
 		errorMap.put(5, "Error!! contains different character");
+		errorMap.put(6, "Missing bracket open");
+		errorMap.put(7, "Missing bracket close");
 	}
 }

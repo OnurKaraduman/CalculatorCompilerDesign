@@ -13,16 +13,15 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out
+				.println("Islemlerinizi istediginiz gibi yazabilirsiniz\nComment baslangic isareti:!\nComment sonlandirma isareti:!\nGecerli islemler:üs(^), topla(+), ciýkarma(-), carpma(*), bolme(/), parantez()");
+		System.out.println("\nIsleminizi giriniz:\n");
 		Scanner scanner = new Scanner(System.in);
-		// String userText = scanner.nextLine();
-		// LexicalAnalyser lexAnalyser = new LexicalAnalyser(userText);
-		// recursionFunctionExample(0);
 		String a = scanner.nextLine();
 		ArrayList<String> list = new ArrayList<String>();
-		// list = stringToList(a);
 		LexicalAnalyser lexAnalyzer = new LexicalAnalyser(a);
 		if (lexAnalyzer.startAnalyse()) {
-			System.out.println("Analiz Basarili");
+			System.out.println("Ýlk Analiz Basarili");
 			if (!lexAnalyzer.controlTokenOrder()) {
 				System.out.println("Analiz Hatasi");
 				lexAnalyzer.sysOutErrors();
@@ -35,17 +34,5 @@ public class main {
 
 		} else
 			System.out.println("Analiz Hatasi");
-
 	}
-
-	public static ArrayList<String> stringToList(String s) {
-		char[] c = s.toCharArray();
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < c.length; i++) {
-			list.add(String.valueOf(c[i]));
-
-		}
-		return list;
-	}
-
 }
