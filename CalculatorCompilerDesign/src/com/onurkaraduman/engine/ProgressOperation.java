@@ -51,7 +51,6 @@ public class ProgressOperation {
 				// parantezin içinden gelen degeri bir onceki listemizin icine
 				// ekliyoruz
 				arr2.add(String.valueOf(result));
-				System.out.println("bracket");
 
 				// Eger parantez kapanmýþ ise
 			} else if (listAll.get(i).equals(bracketClose)) {
@@ -72,7 +71,6 @@ public class ProgressOperation {
 			arr2.add(listAll.get(i));
 		}
 		resultOfAllText = processWithArrayList(arr2);
-		// System.out.println(processWithArrayList(arr2));
 		return listAll.size();
 
 	}

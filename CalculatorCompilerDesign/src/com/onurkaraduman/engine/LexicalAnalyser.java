@@ -15,7 +15,7 @@ public class LexicalAnalyser {
 
 	private int TOKEN_TYPE_NUMBER = 0;
 	private int TOKEN_TYPE_OPERATION = 1;
-	
+
 	private int bracketOpenCounter = 0;
 	private int bracketCloseCounter = 0;
 
@@ -109,7 +109,7 @@ public class LexicalAnalyser {
 		return false;
 	}
 
-	//tokenlarý ata
+	// tokenlarý ata
 	public boolean assignTokens() {
 		for (int i = 0; i < listAll.size(); i++) {
 			String element = listAll.get(i);
@@ -120,7 +120,7 @@ public class LexicalAnalyser {
 				i++;
 				element = listAll.get(i);
 				while (!element.equals(comment)) {
-					
+
 					if (i == listAll.size()) {
 						i++;
 						return true;
@@ -128,8 +128,9 @@ public class LexicalAnalyser {
 					element = listAll.get(i);
 					i++;
 				}
+				
 			}
-			
+			element = listAll.get(i);
 			if (element.equals(space)) {
 				continue;
 			} else if (operationsAll.contains(element)) {
@@ -167,7 +168,7 @@ public class LexicalAnalyser {
 		return true;
 	}
 
-	//lex analiz controlunu yap
+	// lex analiz controlunu yap
 	public boolean controlTokenOrder() {
 		for (int i = 0; i < tokens.size(); i++) {
 			Error error = new Error();
@@ -191,18 +192,21 @@ public class LexicalAnalyser {
 				}
 			} else if (token.getTokenType() == TOKEN_TYPE_OPERATION) {
 				if (token.getTokenValue().equals(bracketOpen)) {
-					bracketOpenCounter ++;
-					
-				}
-				else if (token.getTokenValue().equals(bracketClose)) {
+					bracketOpenCounter++;
+
+				} else if (token.getTokenValue().equals(bracketClose)) {
 					bracketCloseCounter++;
 				}
 				if ((i + 1) >= tokens.size()) {
-					error.setError(errorList.errorMap.get(4));
-					error.setErrorCode(4);
-					error.setPosition(token.getPosition());
-					errors.add(error);
+					if (isOperator(token.getTokenValue())) {
+						error.setError(errorList.errorMap.get(4));
+						error.setErrorCode(4);
+						error.setPosition(token.getPosition());
+						errors.add(error);
+
+					}
 					break;
+
 				}
 				token2 = tokens.get(i + 1);
 				if (i == 0) {
@@ -219,18 +223,19 @@ public class LexicalAnalyser {
 						error.setPosition(token.getPosition());
 						errors.add(error);
 					}
+				} else {
+
 				}
 			}
 		}
 		if (bracketCloseCounter > bracketOpenCounter) {
-			Error error = new  Error();
+			Error error = new Error();
 			error.setError(errorList.errorMap.get(6));
 			error.setErrorCode(4);
 			error.setPosition(tokens.size());
 			errors.add(error);
-		}
-		else if (bracketCloseCounter < bracketOpenCounter) {
-			Error error = new  Error();
+		} else if (bracketCloseCounter < bracketOpenCounter) {
+			Error error = new Error();
 			error.setError(errorList.errorMap.get(7));
 			error.setErrorCode(4);
 			error.setPosition(tokens.size());
@@ -242,7 +247,7 @@ public class LexicalAnalyser {
 		return true;
 	}
 
-	//hatalarý ekrana yazdýr
+	// hatalarý ekrana yazdýr
 	public void sysOutErrors() {
 		for (int i = 0; i < errors.size(); i++) {
 			Error erro = new Error();
